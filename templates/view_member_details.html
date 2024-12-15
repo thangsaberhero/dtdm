@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% if member %}
+<br>
+<div class="d-flex justify-content-between">
+    <h2><b>Thông tin độc giả:</b></h2>
+    <div><a href="edit_member/{{member.id}}" class="btn btn-primary pull-right">Chỉnh sửa</a></div>
+</div>
+<h4 style="width: 80%;">{{member.name}}</h4>
+<br>
+<hr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã độc giả</th>
+            <th>Tên độc giả</th>
+            <th>Email</th>
+            <th>Ngày đăng ký</th>
+            <th>Công nợ</th>
+            <th>Số tiền đã chi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{member.id}}</td>
+            <td>{{member.name}}</td>
+            <td>{{member.email}}</td>
+            <td>{{member.registered_on}}</td>
+            <td>{{member.outstanding_debt}}</td>
+            <td>{{member.amount_spent}}</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

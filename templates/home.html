@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold" style="margin-bottom: 1.5cm;">Quản lí thư viện</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Ứng dụng quản lý thư viện giúp quản lý sách, số lượng sách, thành viên và các giao dịch trong thư viện.</p>
+
+        <div class="d-flex gap-4 justify-content-center mt-4">
+            <a href="/reports" class="btn btn-primary btn-lg px-4">Báo cáo</a>
+            <a href="/books" class="btn btn-outline-secondary btn-lg px-4">Danh mục sách</a>
+            <a href="/members" class="btn btn-outline-secondary btn-lg px-4">Danh mục độc giả</a>
+            <a href="/transactions" class="btn btn-outline-secondary btn-lg px-4">Chi tiết giao dịch</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

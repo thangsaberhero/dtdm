@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block body %}
+<br>
+<h1>Danh mục sách</h1>
+<a class="btn btn-success" href="/add_book">Thêm sách mới</a>
+<hr>
+{% if books %}
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>ID Sách</th>
+            <th>Tiêu đề</th>
+            <th>Đồng tác giả</th>
+            <th>Số lượng sách</th>
+            <th>Số sách còn lại trong kho</th>
+            <th>Số sách đã được thuê</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr style="cursor:pointer;">
+            <td><a href="/book/{{book.id}}" class="btn btn-dark pull-right">{{"{:05d}".format(book.id)}}</a></td>
+            <td onclick="window.location='/book/{{book.id}}';">{{book.title}}</td>
+            <td onclick="window.location='/book/{{book.id}}';">{{book.author}}</td>
+            <td onclick="window.location='/book/{{book.id}}';">{{book.total_quantity}}</td>
+            <td onclick="window.location='/book/{{book.id}}';">{{book.available_quantity}}</td>
+            <td onclick="window.location='/book/{{book.id}}';">{{book.rented_count}}</td>
+            <td><a href="edit_book/{{book.id}}" class="btn btn-primary pull-right">Chỉnh sửa</a></td>
+            <td>
+                <form action="{{url_for('delete_book', id=book.id)}}" method="POST"
+                    onsubmit="return confirm('Bạn có muốn xóa sách này không?');">
+                    <input type="hidden" name="method" value="Delete">
+                    <input type="submit" value="Xóa" class="btn btn-danger">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

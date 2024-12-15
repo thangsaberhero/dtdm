@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block body %}
+<br>
+<h1>Chi tiết giao dịch</h1>
+<a class="btn btn-success" href="/issue_book">Cấp sách</a>
+<hr>
+{% if transactions%}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã giao dịch</th>
+            <th>Mã sách</th>
+            <th>Mã độc giả</th>
+            <th>Phí mượn sách theo ngày</th>
+            <th>Ngày mượn</th>
+            <th>Ngày trả</th>
+            <th>Tổng số tiền</th>
+            <th>Số tiền đã thanh toán</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{transaction.id}}</td>
+            <td>
+                <a href="book/{{transaction.book_id}}"
+                    class="btn btn-dark pull-right">{{"{:05d}".format(transaction.book_id)}}</a>
+            </td>
+            <td>
+                <a href="member/{{transaction.member_id}}"
+                    class="btn btn-dark pull-right">{{"{:03d}".format(transaction.member_id)}}</a>
+            </td>
+
+            <td>{{transaction.per_day_fee}}</td>
+            <td>{{transaction.borrowed_on}}</td>
+            <td>{{transaction.returned_on}}</td>
+            <td>{{transaction.total_charge}}</td>
+            <td>{{transaction.amount_paid}}</td>
+            {% if transaction.amount_paid=='-' %}
+            <td><a href="return_book/{{transaction.id}}" class="btn btn-danger pull-right">Trả sách</a></td>
+            {% else %}
+            <td>CLOSED</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

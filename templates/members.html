@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block body %}
+<br>
+<h1>Danh mục độc giả </h1>
+<a class="btn btn-success" href="/add_member">Thêm độc giả mới</a>
+<hr>
+{% if members%}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã độc giả</th>
+            <th>Tên độc giả</th>
+            <th>Email</th>
+            <th>Ngày đăng kí</th>
+            <th>Nợ còn lại</th>
+            <th>Số tiền đã chi</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{member.id}}</td>
+            <td>{{member.name}}</td>
+            <td>{{member.email}}</td>
+            <td>{{member.registered_on}}</td>
+            <td>{{member.outstanding_debt}}</td>
+            <td>{{member.amount_spent}}</td>
+            <td><a href="edit_member/{{member.id}}" class="btn btn-primary pull-right">Chỉnh sửa</a></td>
+            <td>
+                <form action="{{url_for('delete_member', id=member.id)}}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this member?');">
+                    <input type="hidden" name="method" value="Delete">
+                    <input type="submit" value="Xóa" class="btn btn-danger">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
